@@ -1,4 +1,4 @@
-﻿(function($) {
+?(function($) {
     $.fn.jSimpleCarousel = function( options ) {
         settings = $.extend({
 			childType: 'div',
@@ -15,8 +15,8 @@
         return this.each(function() {
             var running = false,
                 curr = 0,
-				deslocamento = settings.displacement,
-				s = settings.scroll,
+				displacement = settings.displacement,
+				scrollSize = settings.scroll,
 				container = $(this),
 				ths = $(settings.childType, container),
 				only = settings.visible > 0 ? Math.max(settings.visible, ths.length) - settings.visible : ths.length,
@@ -24,13 +24,13 @@
 			
             if (settings.btnNext) {
                 $(settings.btnNext).click(function() {
-                    return go( curr + s );
+                    return go( curr + scrollSize );
                 });
             };
 
             if ( settings.btnPrev ) {
                 $(settings.btnPrev).click(function() {
-                    return go( curr - s );
+                    return go( curr - scrollSize );
                 });
             };
 
@@ -46,14 +46,14 @@
 					
                     running = true;
                     curr = to;
-                    container.animate({ left: -(curr * deslocamento) }, 200);					
+                    container.animate({ left: -(curr * displacement) }, speed);					
                     running = false;
                 }
                 return false;
             };
 			
 			function init( container ){
-				var carouselContainer = container.wrap($("<div />").attr("id", "simpleCarouselMain").addClass("simpleCarouselMain"));
+				container.wrap($("<div />").attr("id", "simpleCarouselMain").addClass("simpleCarouselMain"));
 			}
 			
 			init( container );
